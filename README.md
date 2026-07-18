@@ -31,6 +31,7 @@ Open `index.html` in a browser.
 - Day navigation (yesterday / today / tomorrow / date)
 - Notes for the selected day
 - Clear day
+- Console languages: English (default), Russian, Spanish (`l` in menu)
 - Dark / light theme (web)
 
 ## License
