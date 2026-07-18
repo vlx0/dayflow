@@ -1,32 +1,38 @@
 # Dayflow
 
-Простое приложение для **распорядка дня** и **заметок**.
+Daily **schedule** and **notes** — console app + optional web UI.
 
-- Без аккаунта и сервера
-- Данные только в браузере (`localStorage`)
-- Работает на компьютере и телефоне
+- No account, no server
+- Console data: `~/.dayflow/data.json`
+- Web data: browser `localStorage`
+- Python 3, no third-party packages
 
-## Запуск
-
-Откройте файл `index.html` в браузере (двойной клик).
-
-Или из папки проекта:
+## Run (console)
 
 ```bash
 # Windows
-start index.html
+Dayflow.bat
+# or
+python dayflow.py
 
-# macOS
-open index.html
+# macOS / Linux
+python3 dayflow.py
+# or
+chmod +x dayflow && ./dayflow
 ```
 
-## Возможности
+## Run (web)
 
-- Распорядок дня по времени (добавить / отметить выполненным / удалить)
-- Переключение дней (вчера / сегодня / завтра / календарь)
-- Заметки на выбранный день
-- Очистка дня одной кнопкой
+Open `index.html` in a browser.
 
-## Лицензия
+## Features
 
-MIT — делайте что хотите.
+- Timed schedule (add / toggle done / delete)
+- Day navigation (yesterday / today / tomorrow / date)
+- Notes for the selected day
+- Clear day
+- Dark / light theme (web)
+
+## License
+
+MIT — do whatever you want.

@@ -4,3 +4,6 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+__pycache__/
+*.pyc
+.dayflow/

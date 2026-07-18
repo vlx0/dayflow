@@ -37,7 +37,7 @@
     themeToggle.textContent = next === "dark" ? "☀" : "☾";
     themeToggle.setAttribute(
       "aria-label",
-      next === "dark" ? "Включить светлую тему" : "Включить тёмную тему"
+      next === "dark" ? "Switch to light theme" : "Switch to dark theme"
     );
     themeToggle.title = themeToggle.getAttribute("aria-label");
   }
@@ -90,19 +90,19 @@
   function formatTitle(key) {
     const today = toKey(new Date());
     const d = fromKey(key);
-    const label = d.toLocaleDateString("ru-RU", {
+    const label = d.toLocaleDateString("en-US", {
       weekday: "long",
       day: "numeric",
       month: "long",
     });
-    if (key === today) return `Сегодня · ${label}`;
+    if (key === today) return `Today · ${label}`;
     const y = new Date();
     y.setDate(y.getDate() - 1);
-    if (key === toKey(y)) return `Вчера · ${label}`;
+    if (key === toKey(y)) return `Yesterday · ${label}`;
     const t = new Date();
     t.setDate(t.getDate() + 1);
-    if (key === toKey(t)) return `Завтра · ${label}`;
-    return label.charAt(0).toUpperCase() + label.slice(1);
+    if (key === toKey(t)) return `Tomorrow · ${label}`;
+    return label;
   }
 
   function shiftDay(delta) {
@@ -147,7 +147,7 @@
     noteEmpty.hidden = sorted.length > 0;
 
     for (const note of sorted) {
-      const when = new Date(note.created).toLocaleTimeString("ru-RU", {
+      const when = new Date(note.created).toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
       });
@@ -155,7 +155,7 @@
       li.className = "item";
       li.innerHTML = `
         <div>
-          <div class="title">${escapeHtml(note.title || "Без названия")}</div>
+          <div class="title">${escapeHtml(note.title || "Untitled")}</div>
           <div class="meta">${when}</div>
           <div class="meta" style="margin-top:8px;white-space:pre-wrap;color:inherit">${escapeHtml(note.body)}</div>
         </div>
@@ -258,13 +258,12 @@
   });
 
   clearDay.addEventListener("click", () => {
-    if (!confirm("Удалить все задачи и заметки за этот день?")) return;
+    if (!confirm("Delete all tasks and notes for this day?")) return;
     store.days[currentDate] = { tasks: [], notes: [] };
     save();
     render();
   });
 
-  // Default time: nearest next half-hour
   const now = new Date();
   now.setMinutes(now.getMinutes() < 30 ? 30 : 60, 0, 0);
   taskTime.value = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
