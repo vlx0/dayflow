@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dayflow — распорядок и заметки</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function () {
+      var t = localStorage.getItem("dayflow.theme");
+      document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+    })();
+  </script>
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="top-row">
+        <div>
+          <p class="brand">Dayflow</p>
+          <h1 id="dateTitle">Сегодня</h1>
+        </div>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Сменить тему" title="Сменить тему">◐</button>
+      </div>
+      <div class="date-nav">
+        <button type="button" id="prevDay" aria-label="Вчера">‹</button>
+        <input type="date" id="datePicker" />
+        <button type="button" id="nextDay" aria-label="Завтра">›</button>
+        <button type="button" class="ghost" id="todayBtn">Сегодня</button>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button type="button" class="tab active" data-tab="schedule" role="tab" aria-selected="true">Распорядок</button>
+      <button type="button" class="tab" data-tab="notes" role="tab" aria-selected="false">Заметки</button>
+    </nav>
+
+    <main>
+      <section id="panel-schedule" class="panel active" role="tabpanel">
+        <form id="taskForm" class="composer">
+          <input type="time" id="taskTime" required />
+          <input type="text" id="taskTitle" placeholder="Что сделать…" required maxlength="120" />
+          <button type="submit">Добавить</button>
+        </form>
+        <ul id="taskList" class="list"></ul>
+        <p id="taskEmpty" class="empty">Пока пусто — добавьте первый пункт распорядка.</p>
+      </section>
+
+      <section id="panel-notes" class="panel" role="tabpanel" hidden>
+        <form id="noteForm" class="composer note-composer">
+          <input type="text" id="noteTitle" placeholder="Заголовок заметки" maxlength="80" />
+          <textarea id="noteBody" placeholder="Текст заметки…" rows="4" required maxlength="4000"></textarea>
+          <button type="submit">Сохранить заметку</button>
+        </form>
+        <ul id="noteList" class="list notes"></ul>
+        <p id="noteEmpty" class="empty">Заметок пока нет.</p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>Данные хранятся только на этом устройстве</span>
+      <button type="button" class="ghost danger" id="clearDay">Очистить день</button>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
